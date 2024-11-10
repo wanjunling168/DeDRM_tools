@@ -109,4 +109,5 @@ This is v10.0.9, a release candidate for v10.1.0. I don't expect there to be maj
 - Fix SHA1 hash function for erdr2pml.py script (#608, thanks @unwiredben).
 - Make Kobo DRM removal not fail when there are undownloaded ebooks (#384, thanks @precondition).
 - Fix Obok import failing in Calibre flatpak due to missing ip command (#586 and #585, thanks @jcotton42).
+- Don't re-pack EPUB if there's no DRM to remove and no postprocessing done (fixes #555).
 
