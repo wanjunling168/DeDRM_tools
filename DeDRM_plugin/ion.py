@@ -15,7 +15,6 @@ Revision history:
 
 Copyright © 2013-2020 Apprentice Harper et al.
 """
-from __future__ import annotations
 
 import collections
 import hashlib
