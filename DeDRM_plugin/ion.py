@@ -1348,7 +1348,7 @@ class DrmIonVoucher(object):
                          process_V4648(shared), process_V5683(shared)]
 
         decrypted=False
-        lastexception: Exception | None = None
+        lastexception = None # type: Exception | None
         for sharedsecret in sharedsecrets:
             key = hmac.new(sharedsecret, b"PIDv3", digestmod=hashlib.sha256).digest()
             aes = AES.new(key[:32], AES.MODE_CBC, self.cipheriv[:16])
