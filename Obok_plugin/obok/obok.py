@@ -168,8 +168,8 @@
 """Manage all Kobo books, either encrypted or DRM-free."""
 from __future__ import print_function
 
-__version__ = '10.0.1'
-__about__ =  "Obok v{0}\nCopyright © 2012-2022 Physisticated et al.".format(__version__)
+__version__ = '10.0.9'
+__about__ =  "Obok v{0}\nCopyright © 2012-2023 Physisticated et al.".format(__version__)
 
 import sys
 import os
@@ -449,9 +449,15 @@ class KoboLibrary(object):
             for m in matches:
                 # print "m:{0}".format(m[0])
                 macaddrs.append(m[0].upper())
+        elif sys.platform.startswith('linux'):
+            for interface in os.listdir('/sys/class/net'):
+                with open('/sys/class/net/' + interface + '/address', 'r') as f:
+                    mac = f.read().strip().upper()
+                # some interfaces, like Tailscale's VPN interface, do not have a MAC address
+                if mac != '':
+                    macaddrs.append(mac)
         else:
-            # probably linux
-
+            # final fallback
             # let's try ip
             c = re.compile('\s(' + '[0-9a-f]{2}:' * 5 + '[0-9a-f]{2})(\s|$)', re.IGNORECASE)
             for line in os.popen('ip -br link'):
